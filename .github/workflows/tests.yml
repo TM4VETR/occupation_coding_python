@@ -19,6 +19,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Mock R installation for rpy2
+        run: echo "R_HOME=/mocked/r/installation/directory" >> $GITHUB_ENV
+
       - name: Cache Python packages
         uses: actions/cache@v4
         with:
