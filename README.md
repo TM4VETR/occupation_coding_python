@@ -1,7 +1,6 @@
 # Occupation Coding – Python Wrapper
 
-[![Build](https://github.com/TM4VETR/occupation_coding_python/actions/workflows/tests.yml/badge.svg)](https://github.com/TM4VETR/occupation_coding_python/actions/workflows/tests.yml)
-[![Tests](https://github.com/TM4VETR/occupation_coding_python/actions/workflows/tests.yml/badge.svg?event=push)](https://github.com/TM4VETR/occupation_coding_python/actions/workflows/tests.yml)
+[![Build and Test](https://github.com/TM4VETR/occupation_coding_python/actions/workflows/tests.yml/badge.svg)](https://github.com/TM4VETR/occupation_coding_python/actions/workflows/tests.yml)
 
 This repository provides a Python wrapper around the 
 [**occupationCoding**](https://github.com/malsch/occupationCoding) R package by **Malte Schierholz** and collaborators.  
