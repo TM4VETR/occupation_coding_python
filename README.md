@@ -85,6 +85,22 @@ index = retrieve_index()
 print(index)
 ```
 
+# Integration into TM4VETR  
+
+
+The aim of the [TM4VETR](https://github.com/TM4VETR/) collection is to build a collection of text mining approaches that can be nested like a pipeline. Each part uses *stout* and *stdin* to forward data to the next step.
+
+
+In this sense, this occupation coding script can also be called as follows:
+
+```
+occupation_coding.py <input_text>
+```
+
+
+The input text is then separated at all spaces, line breaks and commas, before all job titles are matched and the corresponding occupational codes are returned.
+
+
 ## Credits
 
 This project wraps [occupationCoding](https://github.com/malsch/occupationCoding) R package by Malte Schierholz and collaborators.
