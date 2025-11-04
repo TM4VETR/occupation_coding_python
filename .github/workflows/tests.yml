@@ -19,27 +19,6 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install R and system libraries
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            r-base r-base-dev \
-            git \
-            libcurl4-openssl-dev \
-            libssl-dev \
-            libxml2-dev \
-            libpcre2-dev \
-            liblzma-dev \
-            libbz2-dev \
-            libicu-dev \
-            libtirpc-dev
-
-      - name: Configure R library path
-        run: |
-          mkdir -p ~/R/x86_64-pc-linux-gnu-library/4.3
-          echo 'R_LIBS_USER="~/R/x86_64-pc-linux-gnu-library/4.3"' >> ~/.Renviron
-          echo '.libPaths("~/R/x86_64-pc-linux-gnu-library/4.3")' >> ~/.Rprofile
-
       - name: Cache Python packages
         uses: actions/cache@v4
         with:

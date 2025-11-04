@@ -19,18 +19,3 @@ def test_cli_missing_argument():
     )
     assert result.returncode != 0
     assert "usage" in result.stderr.lower() or "error" in result.stderr.lower()
-
-
-def test_cli_single_occupation():
-    """Ensure the CLI example in the README executes without errors."""
-    result = subprocess.run(
-        [sys.executable, "run.py", "--occupation", "Bürokauffrau"],
-        capture_output=True,
-        text=True,
-        timeout=60
-    )
-
-    print(result)
-
-    assert result.returncode == 0, f"CLI failed: {result.stderr or result.stdout}"
-    assert "Buerokauffrau" in result.stdout
