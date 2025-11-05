@@ -19,6 +19,8 @@ def prepare_r_environment() -> None:
         {"name": "remotes"},
         {"name": "readxl"},
         {"name": "occupationCoding", "github": "malsch/occupationCoding"},
+        {"name": "mvtnorm"}, # required by occupationCoding for training
+        {"name": "stringdist"}, # required by occupationCoding for training
     ])
 
     # Download required data files
@@ -59,4 +61,4 @@ def install_r_packages(packages: Dict) -> None:
             }}))
             ''')
 
-    logger.info("Successfully installed R packages!")
+    logger.info("Successfully installed R packages.")

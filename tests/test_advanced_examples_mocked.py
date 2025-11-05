@@ -9,14 +9,14 @@ sys.modules["occupation_coding"] = MagicMock()
 
 
 def test_multiple_occupations_mocked():
-    from occupation_coding import code_occupations
+    from occupation_coding import code_occupations # pylint: disable=import-outside-toplevel
 
     code_occupations(occupations=["Bürokauffrau", "Abschleifer"])
     code_occupations.assert_called()
 
 
 def test_retrieve_index_mocked():
-    from occupation_coding import retrieve_index
+    from occupation_coding import retrieve_index # pylint: disable=import-outside-toplevel
 
     retrieve_index()
     retrieve_index.assert_called()

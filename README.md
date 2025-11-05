@@ -85,6 +85,53 @@ index = retrieve_index()
 print(index)
 ```
 
+### Training Models
+
+The R package also allows to train two types of similarity models, originating from (Schierholz, 2019): 
+* wordwise similarity and
+* substring similarity.
+ 
+Subsequently, the trained models can be used for inference.
+
+#### Training a model
+
+```python
+from training import train_model
+
+wordwise_model = train_model("wordwise")
+substring_model = train_model("substring")
+```
+
+#### Saving a model
+
+```python
+from training import save_model
+
+save_model(wordwise_model, "model_wordwise.RDS")
+```
+
+The model will be saved as .RDS file.
+
+#### Loading a model
+
+```python
+from training import load_model
+
+model = load_model("model_wordwise.RDS")
+```
+
+#### Making predictions
+
+The trained model can then be used for making predictions:
+
+```python
+from training import predict
+
+results = predict(model, ["Bürokauffrau", "Maschinenbauingenieur", "Krankenpfleger"])
+print(results)
+```
+
+
 # Integration into TM4VETR  
 
 

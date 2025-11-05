@@ -29,7 +29,7 @@ def get_model_dir() -> str:
     """
     Returns the absolute path to the model directory.
     """
-    default_dir = os.path.join(PROJECT_DIR, "model")
+    default_dir = os.path.join(PROJECT_DIR, "models")
     return get_dir("MODEL_DIR", default_dir)
 
 

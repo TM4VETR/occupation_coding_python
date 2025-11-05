@@ -31,7 +31,7 @@ def test_single_occupation():
     reason="Skipped in CI because it requires an R installation and local data."
 )
 def test_multiple_occupations():
-    from occupation_coding import code_occupations
+    from occupation_coding import code_occupations # pylint: disable=import-outside-toplevel
 
     """Ensure code_occupations() example runs."""
     occupations = [
@@ -59,7 +59,7 @@ def test_multiple_occupations():
 )
 def test_retrieve_index():
     """Ensure retrieve_index() example runs."""
-    from occupation_coding import retrieve_index
+    from occupation_coding import retrieve_index # pylint: disable=import-outside-toplevel
 
     try:
         index = retrieve_index()

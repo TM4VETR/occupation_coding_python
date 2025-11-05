@@ -4,7 +4,7 @@ import sys
 
 def main(occupation: str):
     """ CLI entrypoint """
-    from occupation_coding import code_occupations
+    from occupation_coding import code_occupations # pylint: disable=import-outside-toplevel
 
     results = code_occupations([occupation])
     print(results)
