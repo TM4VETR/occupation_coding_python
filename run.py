@@ -1,11 +1,11 @@
 import argparse
 import sys
 
-from occupation_coding import code_occupations
-
 
 def main(occupation: str):
     """ CLI entrypoint """
+    from occupation_coding import code_occupations
+
     results = code_occupations([occupation])
     print(results)
 
