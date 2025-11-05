@@ -5,6 +5,7 @@ from rpy2.robjects import r
 from utils.data_util import get_model_dir
 from utils.logging_util import logger
 from utils.r_util import prepare_r_environment
+from utils.text_util import replace_umlauts
 
 
 prepare_r_environment()
@@ -131,10 +132,15 @@ def predict(model, occupations):
     Returns:
         R object: Predicted occupational codes.
     """
+    if not occupations or len(occupations) == 0:
+        logger.info("No occupations provided for prediction.")
+        return None
 
-    # Quote and join occupations for R vector syntax
-    text_r = ", ".join(f'"{o}"' for o in occupations)
-    r(f'text_input <- c({text_r})')
+    # Replace umlauts in job titles
+    occupations = [replace_umlauts(o) for o in occupations]
+
+    text_input = ", ".join(f'"{o}"' for o in occupations)
+    r(f'text_input <- c({text_input})')
 
     r.assign("model", model)
 
