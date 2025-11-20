@@ -3,6 +3,8 @@ from typing import List
 
 from rpy2.robjects import r
 
+from utils.dataframe_util import parse_results
+from utils.logging_util import logger
 from utils.r_util import prepare_r_environment
 from utils.text_util import replace_umlauts
 
@@ -44,7 +46,8 @@ def retrieve_index():
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        sys.exit("No input text provided.")
+        logger.error("No input text provided.")
+        sys.exit(1)
 
     input_text = sys.argv[1]
 
@@ -52,4 +55,8 @@ if __name__ == "__main__":
     occupations = [o.strip() for o in input_text.replace(",", " ").split() if o.strip()]
 
     results = code_occupations(occupations)
-    print("\n".join(map(str, results)))
+    result_df = parse_results(results)
+
+    assert 'pred.code' in result_df.columns, "Expected column 'pred.code' not found in results."
+    result_values = result_df['pred.code'].tolist()
+    print("\n".join(result_values))
