@@ -3,10 +3,13 @@ Helper functions to parse the results to a pandas DataFrame.
 """
 
 import pandas as pd
+
+from rpy2.robjects import conversion, default_converter
 from rpy2.robjects import pandas2ri
 
-# Activate automatic R -> pandas DataFrame conversion
-pandas2ri.activate()
+
+# Build a pandas-aware converter once
+_PANDAS_CONVERTER = default_converter + pandas2ri.converter
 
 
 def parse_results(results) -> pd.DataFrame:
@@ -19,5 +22,11 @@ def parse_results(results) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Parsed results as a pandas DataFrame.
     """
-    df = pandas2ri.rpy2py(results)
+    with conversion.localconverter(_PANDAS_CONVERTER):
+        df = conversion.rpy2py(results)
+
+    # Safety: ensure we really return a pandas DataFrame
+    if not isinstance(df, pd.DataFrame):
+        df = pd.DataFrame(df)
+
     return df
