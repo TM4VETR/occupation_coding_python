@@ -30,7 +30,13 @@ def prepare_r_environment() -> None:
     data_dir = get_data_dir()
     path_berufsliste = str(os.path.join(data_dir, "Gesamtberufsliste_der_BA.xlsx")).replace("\\", "/")
     globalenv["path_berufsliste"] = path_berufsliste
-    r('coding_index_w_codes <- prepare_German_coding_index_Gesamtberufsliste_der_BA(path_berufsliste, count.categories = FALSE)')
+    
+    # make sure the package is actually available and loaded
+    r('if (!requireNamespace("occupationCoding", quietly = TRUE)) stop("R package occupationCoding not available")')
+    r('suppressPackageStartupMessages(library(occupationCoding))')
+
+    r('coding_index_w_codes <- occupationCoding::prepare_German_coding_index_Gesamtberufsliste_der_BA(path_berufsliste, count.categories = FALSE)')
+
 
 
 def install_r_packages(packages: Dict) -> None:
