@@ -27,7 +27,7 @@ def code_occupations(occupations: List[str]):
     occupations = [replace_umlauts(o) for o in occupations]
 
     r('text_input <- c({})'.format(", ".join(f'"{o}"' for o in occupations)))
-    r('results <- predictWithCodingIndex(text_input, coding_index = coding_index_w_codes)')
+    r('results <- occupationCoding::predictWithCodingIndex(text_input, coding_index = coding_index_w_codes)')
     results = r('results')
 
     return results
