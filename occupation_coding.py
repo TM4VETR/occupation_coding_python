@@ -1,6 +1,7 @@
 import sys
 from typing import List
 
+import pandas as pd
 from rpy2.robjects import r
 
 from utils.dataframe_util import parse_results
@@ -12,7 +13,7 @@ from utils.text_util import replace_umlauts
 prepare_r_environment()
 
 
-def code_occupations(occupations: List[str]):
+def code_occupations(occupations: List[str]) -> pd.DataFrame:
     """
     Matches all occupations and returns the corresponding codes.
 
@@ -20,7 +21,7 @@ def code_occupations(occupations: List[str]):
         occupations (List[str]): List of job titles to match.
 
     Returns:
-        List[str]: List of matched occupation codes.
+        pandas.DataFrame: DataFrame with matching results.
     """
 
     # Replace umlauts in job titles
@@ -30,7 +31,9 @@ def code_occupations(occupations: List[str]):
     r('results <- occupationCoding::predictWithCodingIndex(text_input, coding_index = coding_index_w_codes)')
     results = r('results')
 
-    return results
+    df_results = parse_results(results)
+
+    return df_results
 
 
 def retrieve_index():
@@ -54,8 +57,7 @@ if __name__ == "__main__":
     # Split at spaces, line breaks, commas
     occupations = [o.strip() for o in input_text.replace(",", " ").split() if o.strip()]
 
-    results = code_occupations(occupations)
-    result_df = parse_results(results)
+    result_df = code_occupations(occupations)
 
     assert 'pred.code' in result_df.columns, "Expected column 'pred.code' not found in results."
     result_values = result_df['pred.code'].tolist()
