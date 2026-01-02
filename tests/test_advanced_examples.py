@@ -6,12 +6,14 @@ import pytest
 import subprocess
 import sys
 
+from occupation_coding import code_occupations
+
 
 @pytest.mark.skipif(
     os.environ.get("GITHUB_ACTIONS", "").lower() == "true",
     reason="Skipped in CI because it requires an R installation and local data."
 )
-def test_single_occupation():
+def test_single_occupation_subprocess():
     """Ensure the CLI example in the README executes without errors."""
     result = subprocess.run(
         [sys.executable, "run.py", "--occupation", "Bürokauffrau"],
@@ -24,6 +26,18 @@ def test_single_occupation():
 
     assert result.returncode == 0, f"CLI failed: {result.stderr or result.stdout}"
     assert "Buerokauffrau" in result.stdout
+
+
+@pytest.mark.skipif(
+    os.environ.get("GITHUB_ACTIONS", "").lower() == "true",
+    reason="Skipped in CI because it requires an R installation and local data."
+)
+def test_single_occupation():
+    """Ensure the CLI example in the README executes without errors."""
+    df_results = code_occupations(occupations=["Bürokauffrau"])
+
+    assert "Buerokauffrau" in df_results["ans"].values
+    assert "71402" in df_results["pred.code"].values
 
 
 @pytest.mark.skipif(
