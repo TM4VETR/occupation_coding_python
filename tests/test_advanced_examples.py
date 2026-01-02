@@ -6,8 +6,6 @@ import pytest
 import subprocess
 import sys
 
-from occupation_coding import code_occupations
-
 
 @pytest.mark.skipif(
     os.environ.get("GITHUB_ACTIONS", "").lower() == "true",
@@ -34,6 +32,8 @@ def test_single_occupation_subprocess():
 )
 def test_single_occupation():
     """Ensure the CLI example in the README executes without errors."""
+    from occupation_coding import code_occupations
+
     df_results = code_occupations(occupations=["Bürokauffrau"])
 
     assert "Buerokauffrau" in df_results["ans"].values
